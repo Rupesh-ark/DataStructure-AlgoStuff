@@ -5,6 +5,7 @@ using namespace std;
 int main()
 {
     int n;
+    int missingNumber;
     cin >> n;
     vector<int> arr(n);
     for (int &x : arr)
@@ -19,7 +20,11 @@ int main()
     //     cout << arr[j] << " ";
     // leftRotate(arr);
     // leftRotateN(arr, 3);
-    rightRotate(arr);
-    for (int j = 0; j < n; j++)
-        cout << arr[j] << " ";
+    // rightRotate(arr);
+    //zerosToBack(arr);
+
+    missingNumber = getMissingNumber(arr);
+    cout << "The missing number is : " << missingNumber;
+    // for (int j = 0; j < n; j++)
+    //     cout << arr[j] << " ";
 }
