@@ -10,6 +10,7 @@ void reverseArray(int &l, int &r, std::vector<int> &arr);
 void zerosToBack(std::vector<int> &arr);
 int getMissingNumber(std::vector<int> &arr);
 std::vector<int> findUnion(std::vector<int> &a, std::vector<int> &b);
+std::vector<std::vector<std::string>> groupAnagrams(std::vector<std::string>& strs);
 
 int getLargest(std::vector<int> &arr)
 {
@@ -232,4 +233,34 @@ int getMissingNumber(std::vector<int> &arr){
     }
     xorResA = xorResA ^ size;
     return xorResA ^ xorResB;
+}
+
+bool containsDuplicate(std::vector<int> &arr){
+    std::unordered_map<int, bool> arrayHash;
+    for (int i = 0; i < arr.size(); i++)
+    {
+        if(arrayHash[arr[i]]){
+            return true;
+        }
+        arrayHash[arr[i]] = true;
+    }
+    return false;
+}
+
+std::vector<std::vector<std::string>> groupAnagrams(std::vector<std::string>& strs){
+
+    std::unordered_map<std::string, std::vector<std::string>> stringSum;
+    std::vector<std::vector<std::string>> stringGroup;
+    int sum;
+    std::string key;
+    for(std::string str: strs){
+        key = str;
+        std::sort(key.begin(), key.end());
+        stringSum[key].push_back(str);
+    }
+    
+    for(auto key : stringSum){
+        stringGroup.push_back(key.second);
+    }
+    return stringGroup;
 }
