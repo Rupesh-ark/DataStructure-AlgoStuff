@@ -5,12 +5,13 @@ int getSecondLargest(std::vector<int> &arr);
 void reverseArray(int l, int r, std::vector<int> &arr);
 int removeDuplicates(std::vector<int> &sortedArr);
 void leftRotate(std::vector<int> &arr);
-
 void reverseArray(int &l, int &r, std::vector<int> &arr);
 void zerosToBack(std::vector<int> &arr);
 int getMissingNumber(std::vector<int> &arr);
 std::vector<int> findUnion(std::vector<int> &a, std::vector<int> &b);
-std::vector<std::vector<std::string>> groupAnagrams(std::vector<std::string>& strs);
+std::vector<std::vector<std::string>> groupAnagrams(std::vector<std::string> &strs);
+std::vector<int> twoSum(std::vector<int> &nums, int target);
+std::vector<int> productExceptSelf(std::vector<int>& nums);
 
 int getLargest(std::vector<int> &arr)
 {
@@ -155,20 +156,25 @@ void leftRotateN(std::vector<int> &arr, int k)
     }
 }
 
-void zerosToBack(std::vector<int> &arr){
-    int j = - 1, size = arr.size();
+void zerosToBack(std::vector<int> &arr)
+{
+    int j = -1, size = arr.size();
     for (int i = 0; i < size; i++)
     {
-        if(arr[i] == 0){
+        if (arr[i] == 0)
+        {
             j = i;
             break;
         }
     }
-    if(j == -1) return;
-    if(j >= 0){
+    if (j == -1)
+        return;
+    if (j >= 0)
+    {
         for (int i = j + 1; i < size; i++)
         {
-            if(arr[i] != 0){
+            if (arr[i] != 0)
+            {
                 std::swap(arr[i], arr[j]);
                 j++;
             }
@@ -176,44 +182,57 @@ void zerosToBack(std::vector<int> &arr){
     }
 }
 
-std::vector<int> findUnion(std::vector<int> &a, std::vector<int> &b) {
+std::vector<int> findUnion(std::vector<int> &a, std::vector<int> &b)
+{
     std::vector<int> uni;
     int i = 0, j = 0, lastElement;
-    
-    if(a[i] <= b[j]){
+
+    if (a[i] <= b[j])
+    {
         uni.push_back(a[i]);
         i++;
-    }else{
+    }
+    else
+    {
         uni.push_back(b[j]);
         j++;
     }
     lastElement = uni[0];
-    
-    while (i < a.size() && j < b.size()){
-        if(a[i] <= b[j] ){
-            if (a[i] != lastElement){
+
+    while (i < a.size() && j < b.size())
+    {
+        if (a[i] <= b[j])
+        {
+            if (a[i] != lastElement)
+            {
                 uni.push_back(a[i]);
                 lastElement = a[i];
             }
             i++;
         }
-        else {
-            if(b[j] != lastElement){
+        else
+        {
+            if (b[j] != lastElement)
+            {
                 uni.push_back(b[j]);
                 lastElement = b[j];
             }
             j++;
         }
     }
-    while( i < a.size()){
-        if (a[i] != lastElement){
+    while (i < a.size())
+    {
+        if (a[i] != lastElement)
+        {
             uni.push_back(a[i]);
             lastElement = a[i];
         }
         i++;
     }
-    while( j < b.size()){
-        if(b[j] != lastElement){
+    while (j < b.size())
+    {
+        if (b[j] != lastElement)
+        {
             uni.push_back(b[j]);
             lastElement = b[j];
         }
@@ -222,8 +241,8 @@ std::vector<int> findUnion(std::vector<int> &a, std::vector<int> &b) {
     return uni;
 }
 
-
-int getMissingNumber(std::vector<int> &arr){
+int getMissingNumber(std::vector<int> &arr)
+{
 
     int size = arr.size(), xorResA = 0, xorResB = 0;
     for (int i = 0; i < size; i++)
@@ -235,11 +254,13 @@ int getMissingNumber(std::vector<int> &arr){
     return xorResA ^ xorResB;
 }
 
-bool containsDuplicate(std::vector<int> &arr){
+bool containsDuplicate(std::vector<int> &arr)
+{
     std::unordered_map<int, bool> arrayHash;
     for (int i = 0; i < arr.size(); i++)
     {
-        if(arrayHash[arr[i]]){
+        if (arrayHash[arr[i]])
+        {
             return true;
         }
         arrayHash[arr[i]] = true;
@@ -247,20 +268,57 @@ bool containsDuplicate(std::vector<int> &arr){
     return false;
 }
 
-std::vector<std::vector<std::string>> groupAnagrams(std::vector<std::string>& strs){
+std::vector<std::vector<std::string>> groupAnagrams(std::vector<std::string> &strs)
+{
 
     std::unordered_map<std::string, std::vector<std::string>> stringSum;
     std::vector<std::vector<std::string>> stringGroup;
     int sum;
     std::string key;
-    for(std::string str: strs){
+    for (std::string str : strs)
+    {
         key = str;
         std::sort(key.begin(), key.end());
         stringSum[key].push_back(str);
     }
-    
-    for(auto key : stringSum){
+
+    for (auto key : stringSum)
+    {
         stringGroup.push_back(key.second);
     }
     return stringGroup;
+}
+
+std::vector<int> twoSum(std::vector<int> &nums, int target)
+{
+    int size = nums.size(), zeroSum;
+    std::unordered_map<int, int> numHash;
+    for (int i = 0; i < size; i++)
+    { 
+        zeroSum = target - nums[i];
+        if(numHash.count(zeroSum)){
+            return {numHash[zeroSum], i};
+        }
+        numHash[nums[i]] = i;
+        
+    }
+    return {};
+}
+
+std::vector<int> productExceptSelf(std::vector<int>& nums){
+
+    std::vector<int> productArray;
+    int size = nums.size(), temp = 1;
+    for (int i = 0; i < size; i++)
+    {
+        productArray.push_back(temp);
+        temp = temp * nums[i];
+    }
+    temp = 1;
+    for (int i = size - 1; i >= 0; i--)
+    {
+        productArray[i] = productArray[i] * temp;
+        temp = temp * nums[i];
+    }
+    return productArray;
 }

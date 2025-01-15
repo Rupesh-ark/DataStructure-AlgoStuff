@@ -1,12 +1,1 @@
-
-
-max,
-buy,
-doc,
-may,
-ill,
-duh,
-tin,
-bar,
-pew,
-cab,
+0,0,9,0,0,
