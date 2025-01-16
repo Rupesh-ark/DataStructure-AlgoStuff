@@ -16,6 +16,7 @@
               // 2) Compile the temporary file
               "g++",
               "\"${fileDirname}\\jspwTest.cpp\"",
+              "-std=c++20",
               "-o",
               "\"${fileDirname}\\jspwTest\"",
 

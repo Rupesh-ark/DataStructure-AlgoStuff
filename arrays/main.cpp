@@ -46,13 +46,17 @@ int main()
     int target = 9;
     res = twoSum(testCase, target);
     cout << res[0] << "," << res[1];
+
+    vector<int> testCase = {0,3,7,2,5,8,4,6,0,1};
+    vector<int> res;
+    res = topKFrequent(testCase, 2);
+    for(auto i : res)
+        cout << i << ",";
+
     */
     
-    vector<int> testCase = {-1,1,0,-3,3};
-    vector<int> res;
-    res = productExceptSelf(testCase);
-    for (auto i : res){
-        
-        cout << i << ",";
-    }
+    vector<int> testCase = {0,3,7,2,5,8,4,6,0,1};
+    int res;
+    res = longestConsecutive(testCase);
+    cout << res;
 }

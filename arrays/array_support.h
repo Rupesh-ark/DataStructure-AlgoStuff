@@ -1,7 +1,6 @@
 #include <bits/stdc++.h>
 int getLargest(std::vector<int> &arr);
 int getSecondLargest(std::vector<int> &arr);
-// void removeDuplicates(std::vector<int> &sortedArr);
 void reverseArray(int l, int r, std::vector<int> &arr);
 int removeDuplicates(std::vector<int> &sortedArr);
 void leftRotate(std::vector<int> &arr);
@@ -12,6 +11,8 @@ std::vector<int> findUnion(std::vector<int> &a, std::vector<int> &b);
 std::vector<std::vector<std::string>> groupAnagrams(std::vector<std::string> &strs);
 std::vector<int> twoSum(std::vector<int> &nums, int target);
 std::vector<int> productExceptSelf(std::vector<int>& nums);
+std::vector<int> topKFrequent(std::vector<int>& nums, int k);
+int longestConsecutive(std::vector<int>& nums);
 
 int getLargest(std::vector<int> &arr)
 {
@@ -306,7 +307,6 @@ std::vector<int> twoSum(std::vector<int> &nums, int target)
 }
 
 std::vector<int> productExceptSelf(std::vector<int>& nums){
-
     std::vector<int> productArray;
     int size = nums.size(), temp = 1;
     for (int i = 0; i < size; i++)
@@ -321,4 +321,48 @@ std::vector<int> productExceptSelf(std::vector<int>& nums){
         temp = temp * nums[i];
     }
     return productArray;
+}
+
+std::vector<int> topKFrequent(std::vector<int>& nums, int k) {
+    int size = nums.size();
+    std::vector<std::vector<int>> bucket(size + 1);
+    std::unordered_map<int, int> numHash;
+    std::vector<int> solution;
+    
+    for (int i = 0; i < size; i++){
+        numHash[nums[i]] += 1;  
+    }
+    for(auto i : numHash){
+        bucket[i.second].push_back(i.first);
+    }
+
+    for (int i = size; i > 0; i--)
+    {
+        if(solution.size() >= k)
+            break;
+        if(!bucket[i].empty()){
+            solution.insert(solution.end(),bucket[i].begin(), bucket[i].end());
+        }
+    }
+    return solution;
+}
+
+int longestConsecutive(std::vector<int>& nums){
+
+    std::unordered_set<int> numSet;
+    int longest = 0;
+
+    for( const int &i : nums)
+        numSet.insert(i);
+
+    for ( const int &i: numSet){
+        if(!numSet.contains(i - 1)){
+            int end = i + 1;
+            while(numSet.contains(end)){
+                end++;
+            }
+            longest = std::max((end - i), longest);
+        }
+    }
+    return longest;
 }
