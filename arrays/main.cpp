@@ -53,10 +53,21 @@ int main()
     for(auto i : res)
         cout << i << ",";
 
-    */
-    
     vector<int> testCase = {0,3,7,2,5,8,4,6,0,1};
     int res;
     res = longestConsecutive(testCase);
     cout << res;
+
+    vector<int> testCase = {5,25,75};
+    vector<int> res;
+    res = twoSumSortedArray(testCase, 100);
+    for(auto i : res)
+        cout << i << " ";
+
+    */
+    vector<int> testCase = {1,8,6,2,5,4,8,3,7};
+    int res;
+    res = maxArea(testCase);
+    cout << res;
+    
 }

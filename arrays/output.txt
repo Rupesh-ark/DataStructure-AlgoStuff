@@ -1,1 +1,25 @@
-9
+i, height[i]: 0,1
+j, height[j]: 8,7
+The current temp :8
+i, height[i]: 1,8
+j, height[j]: 8,7
+The current temp :49
+i, height[i]: 1,8
+j, height[j]: 7,3
+The current temp :18
+i, height[i]: 1,8
+j, height[j]: 6,8
+The current temp :40
+i, height[i]: 2,6
+j, height[j]: 6,8
+The current temp :24
+i, height[i]: 3,2
+j, height[j]: 6,8
+The current temp :6
+i, height[i]: 4,5
+j, height[j]: 6,8
+The current temp :10
+i, height[i]: 5,4
+j, height[j]: 6,8
+The current temp :4
+49

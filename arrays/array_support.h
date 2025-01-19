@@ -348,7 +348,6 @@ std::vector<int> topKFrequent(std::vector<int>& nums, int k) {
 }
 
 int longestConsecutive(std::vector<int>& nums){
-
     std::unordered_set<int> numSet;
     int longest = 0;
 
@@ -365,4 +364,55 @@ int longestConsecutive(std::vector<int>& nums){
         }
     }
     return longest;
+}
+
+
+int binarySearch(std::vector<int>& numbers, int low, int high, int x)
+{
+    while (low <= high) {
+        int mid = low + (high - low) / 2;
+        if (numbers[mid] == x)
+            return mid;
+        if (numbers[mid] < x)
+            low = mid + 1;
+        else
+            high = mid - 1;
+    }
+    return -1;
+}
+
+std::vector<int> twoSumSortedArray(std::vector<int> &numbers, int target){
+
+   int deltaToSearch, index2, i, size = numbers.size();
+    for (i = 0; i < size; i++)
+    {
+        deltaToSearch = target - numbers[i];
+        std::cout << "Delta to Search : " << deltaToSearch << std::endl; 
+        index2 = binarySearch(numbers, i + 1 , size - 1, deltaToSearch);
+        if(index2 != -1){
+            break;
+        }
+    }
+    return {i+1, index2+1};
+}
+
+
+int maxArea(std::vector<int>& height){
+    int maxArea = 0, i = 0, j = height.size() - 1, temp = 0;
+    while(i != j){
+        std::cout << "i, height[i]: " << i << "," << height[i] << std::endl;
+        std::cout << "j, height[j]: " << j << "," << height[j] << std::endl;
+        if(height[i] <= height[j]){
+            temp = (j - i) * height[i];
+            i++;
+        }
+        else{
+            temp = (j - i) * height[j];
+            j--;
+        } 
+        std::cout << "The current temp :" << temp << std::endl;
+        if(temp > maxArea)
+            maxArea = temp;
+    }
+    return maxArea;
 }
