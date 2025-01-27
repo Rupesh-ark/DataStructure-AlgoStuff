@@ -64,10 +64,18 @@ int main()
     for(auto i : res)
         cout << i << " ";
 
+    vector<int> testCase = {0,0,0,0};
+    vector<vector<int>> res;
+    res = threeSum(testCase);
+    for(auto i : res){
+          for(auto j : i){
+            cout << j << ",";
+        }
+        cout << endl;
+    }
     */
-    vector<int> testCase = {1,8,6,2,5,4,8,3,7};
-    int res;
-    res = maxArea(testCase);
-    cout << res;
-    
+    vector<int> testCase = {7,6,4,3,1};
+    int output;
+    output = maxProfit(testCase);
+    cout << "The max profit is : " << output;
 }

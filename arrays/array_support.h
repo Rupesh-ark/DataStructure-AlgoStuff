@@ -416,3 +416,50 @@ int maxArea(std::vector<int>& height){
     }
     return maxArea;
 }
+
+std::vector<std::vector<int>> threeSum(std::vector<int>& nums){
+    int i = 0, size = nums.size(), j, k, sum;
+    std::vector<std::vector<int>> solution;
+    sort(nums.begin(),nums.end());
+    while(i < size){
+        if(i > 0 && nums[i] == nums[i+1]){
+            i++;
+            continue;
+        }
+        j = i + 1;
+        k = size - 1;
+        while(j < k){
+            sum = nums[i] + nums[j] + nums[k];
+            if(sum == 0){
+                solution.push_back({nums[i],nums[j],nums[k]});
+                j++;
+                while(nums[j] == nums[j-1]){
+                    j++;
+                }
+            }
+            else if(sum > 0){
+                k--;
+            }
+            else{
+                j++;
+            }
+        }
+        i++;
+    }
+    return solution;
+}
+
+int maxProfit(std::vector<int>& prices) {
+   int i = 0, j = 1, maxValue = 0, diff;
+    while ( j  < prices.size()){
+        diff = prices[j] - prices[i];
+        if(diff < 0)
+            i = j;
+        else{
+            if(diff > maxValue)
+                maxValue = std::max(maxValue, diff) ;
+        }
+        j++;
+    }
+    return maxValue;
+}
