@@ -1,1 +1,17 @@
-The max profit is : 0
+String : pwwkew
+Current char : p
+    Inserting : p
+Current char : w
+    Inserting : w
+Current char : w
+    Erasing : w
+    Erasing : w
+    Inserting : w
+Current char : k
+    Inserting : k
+Current char : e
+    Inserting : e
+Current char : w
+    Erasing : k
+    Inserting : w
+The max length is : 3

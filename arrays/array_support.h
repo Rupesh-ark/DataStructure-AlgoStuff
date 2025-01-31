@@ -10,9 +10,9 @@ int getMissingNumber(std::vector<int> &arr);
 std::vector<int> findUnion(std::vector<int> &a, std::vector<int> &b);
 std::vector<std::vector<std::string>> groupAnagrams(std::vector<std::string> &strs);
 std::vector<int> twoSum(std::vector<int> &nums, int target);
-std::vector<int> productExceptSelf(std::vector<int>& nums);
-std::vector<int> topKFrequent(std::vector<int>& nums, int k);
-int longestConsecutive(std::vector<int>& nums);
+std::vector<int> productExceptSelf(std::vector<int> &nums);
+std::vector<int> topKFrequent(std::vector<int> &nums, int k);
+int longestConsecutive(std::vector<int> &nums);
 
 int getLargest(std::vector<int> &arr)
 {
@@ -295,18 +295,19 @@ std::vector<int> twoSum(std::vector<int> &nums, int target)
     int size = nums.size(), zeroSum;
     std::unordered_map<int, int> numHash;
     for (int i = 0; i < size; i++)
-    { 
+    {
         zeroSum = target - nums[i];
-        if(numHash.count(zeroSum)){
+        if (numHash.count(zeroSum))
+        {
             return {numHash[zeroSum], i};
         }
         numHash[nums[i]] = i;
-        
     }
     return {};
 }
 
-std::vector<int> productExceptSelf(std::vector<int>& nums){
+std::vector<int> productExceptSelf(std::vector<int> &nums)
+{
     std::vector<int> productArray;
     int size = nums.size(), temp = 1;
     for (int i = 0; i < size; i++)
@@ -323,41 +324,49 @@ std::vector<int> productExceptSelf(std::vector<int>& nums){
     return productArray;
 }
 
-std::vector<int> topKFrequent(std::vector<int>& nums, int k) {
+std::vector<int> topKFrequent(std::vector<int> &nums, int k)
+{
     int size = nums.size();
     std::vector<std::vector<int>> bucket(size + 1);
     std::unordered_map<int, int> numHash;
     std::vector<int> solution;
-    
-    for (int i = 0; i < size; i++){
-        numHash[nums[i]] += 1;  
+
+    for (int i = 0; i < size; i++)
+    {
+        numHash[nums[i]] += 1;
     }
-    for(auto i : numHash){
+    for (auto i : numHash)
+    {
         bucket[i.second].push_back(i.first);
     }
 
     for (int i = size; i > 0; i--)
     {
-        if(solution.size() >= k)
+        if (solution.size() >= k)
             break;
-        if(!bucket[i].empty()){
-            solution.insert(solution.end(),bucket[i].begin(), bucket[i].end());
+        if (!bucket[i].empty())
+        {
+            solution.insert(solution.end(), bucket[i].begin(), bucket[i].end());
         }
     }
     return solution;
 }
 
-int longestConsecutive(std::vector<int>& nums){
+int longestConsecutive(std::vector<int> &nums)
+{
     std::unordered_set<int> numSet;
     int longest = 0;
 
-    for( const int &i : nums)
+    for (const int &i : nums)
         numSet.insert(i);
 
-    for ( const int &i: numSet){
-        if(!numSet.contains(i - 1)){
+    for (const int &i : numSet)
+    {
+        if (!numSet.contains(i - 1))
+        {
             int end = i + 1;
-            while(numSet.contains(end)){
+            while (numSet.contains(end))
+            {
                 end++;
             }
             longest = std::max((end - i), longest);
@@ -366,10 +375,10 @@ int longestConsecutive(std::vector<int>& nums){
     return longest;
 }
 
-
-int binarySearch(std::vector<int>& numbers, int low, int high, int x)
+int binarySearch(std::vector<int> &numbers, int low, int high, int x)
 {
-    while (low <= high) {
+    while (low <= high)
+    {
         int mid = low + (high - low) / 2;
         if (numbers[mid] == x)
             return mid;
@@ -381,66 +390,79 @@ int binarySearch(std::vector<int>& numbers, int low, int high, int x)
     return -1;
 }
 
-std::vector<int> twoSumSortedArray(std::vector<int> &numbers, int target){
+std::vector<int> twoSumSortedArray(std::vector<int> &numbers, int target)
+{
 
-   int deltaToSearch, index2, i, size = numbers.size();
+    int deltaToSearch, index2, i, size = numbers.size();
     for (i = 0; i < size; i++)
     {
         deltaToSearch = target - numbers[i];
-        std::cout << "Delta to Search : " << deltaToSearch << std::endl; 
-        index2 = binarySearch(numbers, i + 1 , size - 1, deltaToSearch);
-        if(index2 != -1){
+        std::cout << "Delta to Search : " << deltaToSearch << std::endl;
+        index2 = binarySearch(numbers, i + 1, size - 1, deltaToSearch);
+        if (index2 != -1)
+        {
             break;
         }
     }
-    return {i+1, index2+1};
+    return {i + 1, index2 + 1};
 }
 
-
-int maxArea(std::vector<int>& height){
+int maxArea(std::vector<int> &height)
+{
     int maxArea = 0, i = 0, j = height.size() - 1, temp = 0;
-    while(i != j){
+    while (i != j)
+    {
         std::cout << "i, height[i]: " << i << "," << height[i] << std::endl;
         std::cout << "j, height[j]: " << j << "," << height[j] << std::endl;
-        if(height[i] <= height[j]){
+        if (height[i] <= height[j])
+        {
             temp = (j - i) * height[i];
             i++;
         }
-        else{
+        else
+        {
             temp = (j - i) * height[j];
             j--;
-        } 
+        }
         std::cout << "The current temp :" << temp << std::endl;
-        if(temp > maxArea)
+        if (temp > maxArea)
             maxArea = temp;
     }
     return maxArea;
 }
 
-std::vector<std::vector<int>> threeSum(std::vector<int>& nums){
+std::vector<std::vector<int>> threeSum(std::vector<int> &nums)
+{
     int i = 0, size = nums.size(), j, k, sum;
     std::vector<std::vector<int>> solution;
-    sort(nums.begin(),nums.end());
-    while(i < size){
-        if(i > 0 && nums[i] == nums[i+1]){
+    sort(nums.begin(), nums.end());
+    while (i < size)
+    {
+        if (i > 0 && nums[i] == nums[i + 1])
+        {
             i++;
             continue;
         }
         j = i + 1;
         k = size - 1;
-        while(j < k){
+        while (j < k)
+        {
             sum = nums[i] + nums[j] + nums[k];
-            if(sum == 0){
-                solution.push_back({nums[i],nums[j],nums[k]});
+            if (sum == 0)
+            {
+                solution.push_back({nums[i], nums[j], nums[k]});
                 j++;
-                while(nums[j] == nums[j-1]){
+                while (nums[j] == nums[j - 1])
+                {
                     j++;
                 }
             }
-            else if(sum > 0){
+            else if (sum > 0)
+            {
                 k--;
             }
-            else{
+            else
+            {
                 j++;
             }
         }
@@ -449,17 +471,47 @@ std::vector<std::vector<int>> threeSum(std::vector<int>& nums){
     return solution;
 }
 
-int maxProfit(std::vector<int>& prices) {
-   int i = 0, j = 1, maxValue = 0, diff;
-    while ( j  < prices.size()){
+int maxProfit(std::vector<int> &prices)
+{
+    int i = 0, j = 1, maxValue = 0, diff;
+    while (j < prices.size())
+    {
         diff = prices[j] - prices[i];
-        if(diff < 0)
+        if (diff < 0)
             i = j;
-        else{
-            if(diff > maxValue)
-                maxValue = std::max(maxValue, diff) ;
+        else
+        {
+            if (diff > maxValue)
+                maxValue = std::max(maxValue, diff);
         }
         j++;
     }
     return maxValue;
+}
+
+int lengthOfLongestSubstring(std::string s)
+{
+    std::cout << "String : " << s << std::endl;
+    if (s.empty())
+    {
+        return 0;
+    }
+    int longest = 1, temp, l = 0;
+    std::unordered_set<char> charSet;
+
+    for (int r = 0; r < s.size(); r++)
+    {
+        std::cout << "Current char : " << s[r] << std::endl;
+        while (charSet.contains(s[r]))
+        {
+            charSet.erase(s[l]);
+            l++;
+            std::cout << "    Erasing : " << s[l] << std::endl;
+        }
+        std::cout << "    Inserting : " << s[r] << std::endl;
+        charSet.insert(s[r]);
+        longest = std::max(longest, r - l + 1);
+    }
+
+    return longest;
 }

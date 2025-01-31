@@ -73,9 +73,18 @@ int main()
         }
         cout << endl;
     }
-    */
+
     vector<int> testCase = {7,6,4,3,1};
     int output;
     output = maxProfit(testCase);
     cout << "The max profit is : " << output;
+    */
+    // string testCase = "dvdf";
+    //string testCase = "abcabcbb";
+    //string testCase = "aab";
+    string testCase = "pwwkew";
+    int output;
+    output = lengthOfLongestSubstring(testCase);
+    cout << "The max length is : " << output;
+    return 0;
 }
