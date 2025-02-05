@@ -82,9 +82,9 @@ int main()
     // string testCase = "dvdf";
     //string testCase = "abcabcbb";
     //string testCase = "aab";
-    string testCase = "pwwkew";
+    string testCase = "ABABBA";
     int output;
-    output = lengthOfLongestSubstring(testCase);
+    output = characterReplacement(testCase, 2);
     cout << "The max length is : " << output;
     return 0;
 }

@@ -13,7 +13,8 @@ std::vector<int> twoSum(std::vector<int> &nums, int target);
 std::vector<int> productExceptSelf(std::vector<int> &nums);
 std::vector<int> topKFrequent(std::vector<int> &nums, int k);
 int longestConsecutive(std::vector<int> &nums);
-
+int characterReplacement(std::string s, int k);
+ 
 int getLargest(std::vector<int> &arr)
 {
     int largest = 0;
@@ -491,7 +492,6 @@ int maxProfit(std::vector<int> &prices)
 
 int lengthOfLongestSubstring(std::string s)
 {
-    std::cout << "String : " << s << std::endl;
     if (s.empty())
     {
         return 0;
@@ -501,17 +501,37 @@ int lengthOfLongestSubstring(std::string s)
 
     for (int r = 0; r < s.size(); r++)
     {
-        std::cout << "Current char : " << s[r] << std::endl;
         while (charSet.contains(s[r]))
         {
             charSet.erase(s[l]);
             l++;
-            std::cout << "    Erasing : " << s[l] << std::endl;
         }
-        std::cout << "    Inserting : " << s[r] << std::endl;
         charSet.insert(s[r]);
         longest = std::max(longest, r - l + 1);
     }
 
     return longest;
+}
+
+
+int characterReplacement(std::string s, int k) {
+        
+    int l = 0, maxf = 0, res;
+    std::unordered_map<char, int> charHash;
+    for (int r = 0; r < s.size(); r++)
+    {
+        if(charHash.contains(s[r])){
+            charHash[s[r]]++;
+        }else{
+            charHash.insert({s[r],1});
+        }
+        maxf = std::max(charHash[s[r]], maxf);
+        if((r-l+1) - maxf > k){
+            charHash[s[l]]--;
+            l++;
+        }
+        res = std::max(r-l+1, res);
+
+    }
+    return res;
 }
