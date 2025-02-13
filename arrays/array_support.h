@@ -535,3 +535,27 @@ int characterReplacement(std::string s, int k) {
     }
     return res;
 }
+
+int findMinSortedRotated(std::vector<int>& nums) {
+    int current = 0, size = nums.size() ,prev = size - 1;
+
+    while(nums[current] > nums[prev]){
+        current = prev;
+        prev = (current - 1 + size) % size;
+
+    }
+    return nums[current];
+}
+
+int searchSortedRotated(std::vector<int>& nums, int target) {
+    int current = 0, size = nums.size();
+    for(int i = 0 ; i < size; i++){
+        if(nums[current] > target)
+            current = (current - 1 + size) % size;
+        else if(nums[current] < target)
+            current = (current + 1) % size;  
+        else
+            return current;
+    }
+    return -1;
+}
