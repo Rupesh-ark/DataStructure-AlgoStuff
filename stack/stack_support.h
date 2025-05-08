@@ -1,95 +1,66 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-class MinStack
-{
+class MinStack {
 public:
-    void push(int val)
-    {
-        if (val < stack.top().second)
-        {
-            stack.push({val, val});
-        }
-        else
-        {
-            stack.push({val, stack.top().second});
+    MinStack() = default;
+
+    void push(int val) {
+        if (st.empty() || val < st.top().second) {
+            st.push({val, val});
+        } else {
+            st.push({val, st.top().second});
         }
     }
 
-    void pop()
-    {
-        stack.pop();
+    void pop() {
+        if (!st.empty())
+            st.pop();
     }
 
-    int top()
-    {
-        return stack.top().first;
+    int top() const {
+        return st.top().first;
     }
 
-    int getMin()
-    {
-        return stack.top().second;
+    int getMin() const {
+        return st.top().second;
     }
 
 private:
-    stack<pair<int, int>> stack;
+    stack<pair<int, int>> st;    
 };
 
-bool isValidPrenthesesStack(string s)
-{
+
+bool isValidParenthesesStack(const string &s) {
     stack<char> charStack;
-    char temp;
-    for (const char &c : s)
-    {
-        switch (c)
-        {
-        case '(':
-            charStack.push(')');
-            break;
-        case '[':
-            charStack.push(']');
-            break;
-        case '{':
-            charStack.push('}');
-            break;
-        default:
-            if (charStack.empty())
-                return false;
-            else
-            {
-                temp = charStack.top();
-                if (c == temp)
-                    charStack.pop();
-                else
+    for (char c : s) {
+        switch (c) {
+            case '(':  charStack.push(')'); break;
+            case '[':  charStack.push(']'); break;
+            case '{':  charStack.push('}'); break;
+            default:
+                if (charStack.empty() || charStack.top() != c)
                     return false;
-            }
-            break;
+                charStack.pop();
         }
     }
-    if (charStack.empty())
-        return true;
-    else
-        return false;
+    return charStack.empty();
 }
 
-vector<int> dailyTemperatures(vector<int> &temperatures)
-{
 
-    int size = temperatures.size();
-    stack<pair<int, int>> tempStack;
-    vector<int> output(size);
-    tempStack.push({temperatures[0], 0});
-    for (size_t i = 1; i < size; i++)
-    {   pair<int, int> current = tempStack.top();
-        while (current.first < temperatures[i])
-        {
-            output[current.second] = i - current.second;
-            tempStack.pop();
-            if(tempStack.empty())
-                break;
-            current = tempStack.top();
+vector<int> dailyTemperatures(const vector<int> &temperatures) {
+    int n = temperatures.size();
+    vector<int> answer(n, 0);
+    stack<pair<int,int>> mono;  
+
+    for (int i = 0; i < n; ++i) {
+        while (!mono.empty() && temperatures[i] > mono.top().first) {
+            auto [t, idx] = mono.top();
+            mono.pop();
+            answer[idx] = i - idx;
         }
-        tempStack.push({temperatures[i], i});
+        mono.push({temperatures[i], i});
     }
-    return output;
+
+    return answer;
 }

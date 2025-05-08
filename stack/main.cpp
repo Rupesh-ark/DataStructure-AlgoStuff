@@ -10,7 +10,6 @@ int main(){
     // bool isValid = isValidPrenthesesStack(s);
     // cout << "Is this valid?? : " << isValid;
     int n;
-    int missingNumber;
     cin >> n;
     vector<int> arr(n);
     for (int &x : arr)
