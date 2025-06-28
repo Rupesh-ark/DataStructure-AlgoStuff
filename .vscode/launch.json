@@ -2,19 +2,19 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "C/C++ Runner: Debug Session",
+      "name": "Run a.out",
       "type": "cppdbg",
       "request": "launch",
+      "program": "${fileDirname}/a.out",
       "args": [],
       "stopAtEntry": false,
-      "externalConsole": false,
-      "cwd": "/home/rupesh/Documents/DataStructure-AlgoStuff/arrays",
-      "program": "/home/rupesh/Documents/DataStructure-AlgoStuff/arrays/build/Debug/outDebug",
+      "cwd": "${fileDirname}",
+      "environment": [],
+      "externalConsole": true,
       "MIMode": "gdb",
-      "miDebuggerPath": "gdb",
       "setupCommands": [
         {
-          "description": "Enable pretty-printing for gdb",
+          "description": "Enable pretty-printing",
           "text": "-enable-pretty-printing",
           "ignoreFailures": true
         }

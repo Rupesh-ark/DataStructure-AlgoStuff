@@ -1,0 +1,24 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Build Current File",
+      "type": "shell",
+      "command": "g++",
+      "args": [
+        "-std=c++20",
+        "-Wall",
+        "-Wextra",
+        "-Iincludes",
+        "${file}",
+        "-o",
+        "${fileDirname}/a.out"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": ["$gcc"]
+    }
+  ]
+}
